@@ -156,3 +156,14 @@
 .contact-direct a:hover { color:var(--orange); }
 @media (max-width:900px) { .contact-section-heading { grid-template-columns:1fr; gap:35px; } .contact-section-heading p { margin:0; padding:25px 0 0; border-left:0; border-top:1px solid rgba(255,255,255,.18); } }
 @media (max-width:640px) { .contact-form-wrap { margin-top:40px; } .contact-form { padding:20px; box-shadow:8px 8px 0 rgba(239,127,45,.9); } .contact-form-row { grid-template-columns:1fr; gap:0; } .contact-form-footer { align-items:flex-start; flex-direction:column; } .contact-submit { width:100%; justify-content:center; } .contact-success { padding:22px; box-shadow:8px 8px 0 rgba(239,127,45,.9); } .contact-direct { align-items:flex-start; flex-direction:column; gap:12px; } }
+
+.broda-menu-filters { display:flex; flex-wrap:wrap; gap:8px; margin:30px 0 22px; }
+.broda-menu-filters button { padding:10px 15px; color:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.2); background:transparent; font-size:10px; font-weight:800; letter-spacing:.04em; cursor:pointer; transition:color .18s ease,background .18s ease,border-color .18s ease; }
+.broda-menu-filters button:hover,.broda-menu-filters .broda-filter-active { color:var(--broda-charcoal); border-color:var(--broda-yellow); background:var(--broda-yellow); }
+.broda-menu-image { position:relative; height:190px; margin:-1px -1px 18px; overflow:hidden; background:#1b1716; }
+.broda-menu-image img { width:100%; height:100%; object-fit:cover; transition:transform .35s var(--ease-out),filter .35s ease; }
+.broda-menu-card:hover .broda-menu-image img { transform:scale(1.06); filter:saturate(1.1); }
+.broda-menu-image .broda-menu-tag { position:absolute; top:12px; right:12px; }
+.broda-menu-card > h3,.broda-menu-card > p,.broda-menu-card > .broda-menu-card-bottom { margin-left:18px; margin-right:18px; }
+.services-aside-image { display:block; width:100%; height:180px; margin-bottom:28px; object-fit:cover; filter:saturate(.82); }
+@media (max-width:640px) { .broda-menu-image { height:205px; } .services-aside-image { height:155px; } }
