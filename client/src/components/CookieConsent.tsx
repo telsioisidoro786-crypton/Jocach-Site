@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "wouter";
 
 const CONSENT_KEY = "jocach_cookie_consent";
 
@@ -33,5 +34,5 @@ export default function CookieConsent() {
 
   if (consent) return null;
 
-  return <aside className="cookie-consent" role="dialog" aria-label="Preferências de cookies"><div><span className="cookie-kicker">Privacidade</span><h2>Cookies com propósito.</h2><p>Usamos cookies essenciais para o funcionamento do site. Com a sua autorização, também podemos usar analytics para melhorar a experiência.</p><span className="cookie-note">Pode alterar esta escolha limpando os dados do navegador.</span></div><div className="cookie-actions"><button type="button" className="cookie-reject" onClick={() => choose("rejected")}>Apenas essenciais</button><button type="button" className="cookie-accept" onClick={() => choose("accepted")}>Aceitar cookies</button></div></aside>;
+  return <aside className="cookie-consent" role="dialog" aria-label="Preferências de cookies"><div><span className="cookie-kicker">Privacidade</span><h2>Cookies com propósito.</h2><p>Usamos cookies essenciais para o funcionamento do site. Com a sua autorização, também podemos usar analytics para melhorar a experiência.</p><Link href="/privacidade" className="cookie-policy-link">Ler a Política de Privacidade e Cookies <span aria-hidden="true">↗</span></Link><span className="cookie-note">Pode alterar esta escolha limpando os dados do navegador.</span></div><div className="cookie-actions"><button type="button" className="cookie-reject" onClick={() => choose("rejected")}>Apenas essenciais</button><button type="button" className="cookie-accept" onClick={() => choose("accepted")}>Aceitar cookies</button></div></aside>;
 }
