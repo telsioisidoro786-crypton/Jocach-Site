@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ArrowDown, ArrowLeft, ArrowUpRight, CalendarDays, Clock3, MapPin, Star } from "lucide-react";
 import { Link } from "wouter";
 import { SiteFooter, SiteHeader } from "../App";
@@ -6,11 +7,12 @@ const BRODA_HERO = "/images/broda-hero.jpg";
 const BRODA_INTERIOR = "/images/broda-interior.jpg";
 
 const menu = [
-  { tag: "O clássico", name: "Broda Original", description: "Carne smash, queijo, pickles, cebola e molho Broda no pão brioche.", price: "3.500 Kz" },
-  { tag: "Mais pedido", name: "Broda Cheddar", description: "Duplo smash, cheddar cremoso, cebola caramelizada e molho da casa.", price: "4.500 Kz" },
-  { tag: "Crocante", name: "Broda Chicken", description: "Frango crocante, coleslaw fresco, queijo e maionese picante.", price: "4.000 Kz" },
-  { tag: "Para partilhar", name: "Broda Fries", description: "Batata dourada, cheddar, bacon e o toque secreto da casa.", price: "2.500 Kz" },
+  { tag: "O clássico", category: "Hambúrgueres", name: "Broda Original", description: "Carne smash, queijo, pickles, cebola e molho Broda no pão brioche.", price: "3.500 Kz", image: "/images/broda-original-menu.jpg" },
+  { tag: "Mais pedido", category: "Hambúrgueres", name: "Broda Cheddar", description: "Duplo smash, cheddar cremoso, cebola caramelizada e molho da casa.", price: "4.500 Kz", image: "/images/broda-cheddar-menu.jpg" },
+  { tag: "Crocante", category: "Hambúrgueres", name: "Broda Chicken", description: "Frango crocante, coleslaw fresco, queijo e maionese picante.", price: "4.000 Kz", image: "/images/broda-chicken-menu.jpg" },
+  { tag: "Para partilhar", category: "Acompanhamentos", name: "Broda Fries", description: "Batata dourada, cheddar, bacon e o toque secreto da casa.", price: "2.500 Kz", image: "/images/broda-fries-menu.jpg" },
 ];
+const menuCategories = ["Tudo", "Hambúrgueres", "Acompanhamentos"];
 
 const weeklyPromotions = [
   { label: "Oferta da semana", title: "Terça do Cheddar", description: "Pede o Broda Cheddar e junta batata dourada por conta da casa.", detail: "Todas as terças", accent: "yellow" },
@@ -25,7 +27,9 @@ function getWeekOfYear(date: Date) {
 }
 
 export default function Broda() {
+  const [activeCategory, setActiveCategory] = useState("Tudo");
   const promotion = weeklyPromotions[getWeekOfYear(new Date()) % weeklyPromotions.length];
+  const visibleMenu = activeCategory === "Tudo" ? menu : menu.filter((item) => item.category === activeCategory);
   return (
     <div className="broda-page">
       <section className="broda-hero" style={{ "--broda-hero": `url(${BRODA_HERO})` } as React.CSSProperties}>
@@ -55,7 +59,7 @@ export default function Broda() {
         </div>
       </section>
 
-      <section id="menu" className="broda-menu"><div className="container"><div className="broda-section-heading"><div><span className="broda-kicker"><span />O que sai da chapa</span><h2>Escolhe o teu <em>Broda.</em></h2></div><span className="broda-menu-note">Menu sujeito à disponibilidade do dia.</span></div><div className="broda-menu-grid">{menu.map((item, index) => <article className="broda-menu-card" key={item.name}><div className="broda-menu-card-top"><span>0{index + 1}</span><span className="broda-menu-tag">{item.tag}</span></div><h3>{item.name}</h3><p>{item.description}</p><div className="broda-menu-card-bottom"><strong>{item.price}</strong><span><ArrowUpRight size={16} /></span></div></article>)}</div></div></section>
+      <section id="menu" className="broda-menu"><div className="container"><div className="broda-section-heading"><div><span className="broda-kicker"><span />O que sai da chapa</span><h2>Escolhe o teu <em>Broda.</em></h2></div><span className="broda-menu-note">Menu sujeito à disponibilidade do dia.</span></div><div className="broda-menu-filters" role="tablist" aria-label="Categorias do menu">{menuCategories.map((category) => <button type="button" role="tab" aria-selected={activeCategory === category} className={activeCategory === category ? "broda-filter-active" : ""} key={category} onClick={() => setActiveCategory(category)}>{category}</button>)}</div><div className="broda-menu-grid">{visibleMenu.map((item, index) => <article className="broda-menu-card" key={item.name}><div className="broda-menu-image"><img src={item.image} alt={item.name} loading="lazy" /><span className="broda-menu-tag">{item.tag}</span></div><div className="broda-menu-card-top"><span>0{index + 1}</span><span>{item.category}</span></div><h3>{item.name}</h3><p>{item.description}</p><div className="broda-menu-card-bottom"><strong>{item.price}</strong><span><ArrowUpRight size={16} /></span></div></article>)}</div></div></section>
 
       <section className="broda-story"><div className="container broda-story-grid"><div className="broda-story-image"><img src={BRODA_INTERIOR} alt="Interior acolhedor da Hamburgaria Broda" /><div className="broda-image-stamp">BRODA<br /><strong>SOYO</strong></div></div><div className="broda-story-copy"><span className="broda-kicker broda-kicker-dark"><span />O lugar</span><h2>Chega com fome.<br /><em>Fica pela vibe.</em></h2><p>Uma hamburgaria pensada para a cidade: balcão rápido, mesas para conversa e um ambiente que mistura o urbano com o calor de casa.</p><div className="broda-opening"><div><Clock3 size={18} /><span><strong>Horário</strong>Segunda a domingo · 11h — 22h</span></div><div><MapPin size={18} /><span><strong>Localização</strong>Soyo · Zaire · Angola</span></div></div><a className="broda-button broda-button-dark" href="https://www.google.com/maps/search/?api=1&query=Soyo%2C+Zaire%2C+Angola" target="_blank" rel="noreferrer">Abrir no Google Maps <ArrowUpRight size={16} /></a></div></div></section>
 
