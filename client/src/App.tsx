@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, Route, Switch, useLocation } from "wouter";
 import { ArrowUpRight, Building2, ChevronRight, CircleArrowOutUpRight, Compass, HardHat, MapPin, Menu, Phone, Ruler, X } from "lucide-react";
 import { MapView } from "./components/Map";
+import CookieConsent from "./components/CookieConsent";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
@@ -77,7 +78,7 @@ function AppRouter() {
   return <Switch><Route path="/" component={Home} /><Route path="/servicos" component={Services} /><Route path="/projetos" component={Projects} /><Route path="/broda" component={Broda} /><Route component={NotFound} /></Switch>;
 }
 
-export default function App() { return <ThemeProvider defaultTheme="light"><AppRouter /></ThemeProvider>; }
+export default function App() { return <ThemeProvider defaultTheme="light"><AppRouter /><CookieConsent /></ThemeProvider>; }
 
 export const ServiceIcon = ({ type }: { type: string }) => { const icons: Record<string, typeof Ruler> = { loteamento: Compass, urbanizacao: Building2, croquis: Ruler, licenca: HardHat }; const Icon = icons[type] || CircleArrowOutUpRight; return <Icon size={22} strokeWidth={1.6} />; };
 export const ArrowLink = ({ href, children }: { href: string; children: React.ReactNode }) => <a className="arrow-link" href={href}>{children}<ChevronRight size={17} /></a>;
