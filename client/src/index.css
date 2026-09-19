@@ -128,3 +128,31 @@
 .broda-promo-blue .broda-promo-action { color:var(--broda-charcoal); background:var(--broda-yellow); }
 @media (max-width:900px) { .broda-promo-grid { grid-template-columns:105px 1fr; gap:25px; } .broda-promo-action { grid-column:2; justify-self:start; } }
 @media (max-width:640px) { .broda-promo { padding:43px 0 47px; } .broda-promo-grid { grid-template-columns:1fr; gap:18px; } .broda-promo-label { order:0; } .broda-promo-main { order:1; } .broda-promo-action { grid-column:auto; order:2; } .broda-promo-main h2 { font-size:39px; } .broda-promo-cycle { border-left:0; padding-left:0; } }
+
+.contact-section-heading { display:grid; grid-template-columns:1.1fr .9fr; align-items:end; gap:90px; }
+.contact-section-heading h2 { margin:20px 0 0; color:#fff; font-family:"Space Grotesk",sans-serif; font-size:clamp(42px,5.8vw,82px); line-height:.98; letter-spacing:-.055em; font-weight:500; }
+.contact-section-heading p { max-width:330px; margin:0 0 6px; padding-left:40px; border-left:1px solid rgba(255,255,255,.18); color:rgba(255,255,255,.7); line-height:1.7; font-size:14px; }
+.contact-form-wrap { margin-top:55px; }
+.contact-form { padding:30px; background:#fff; color:var(--navy); box-shadow:18px 18px 0 rgba(239,127,45,.9); }
+.contact-form-row { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.contact-form label { display:flex; flex-direction:column; gap:8px; margin-bottom:20px; color:var(--navy); font-size:10px; font-weight:800; letter-spacing:.03em; }
+.contact-form label span { color:var(--muted); font-weight:500; }
+.contact-form input,.contact-form select,.contact-form textarea { width:100%; border:1px solid var(--border); border-radius:0; outline:0; padding:13px 14px; color:var(--navy); background:#f8fafc; font-size:12px; font-weight:500; transition:border-color .18s ease,box-shadow .18s ease,background .18s ease; }
+.contact-form input::placeholder,.contact-form textarea::placeholder { color:#9aa7b9; }
+.contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus { border-color:var(--orange); background:#fff; box-shadow:0 0 0 3px rgba(239,127,45,.12); }
+.contact-form textarea { resize:vertical; min-height:105px; }
+.contact-form-footer { display:flex; align-items:center; justify-content:space-between; gap:20px; padding-top:5px; }
+.contact-form-footer > span { color:var(--muted); font-size:10px; }
+.contact-submit { display:inline-flex; align-items:center; gap:9px; min-height:45px; padding:0 17px; color:#fff; background:var(--orange); font-size:11px; font-weight:800; cursor:pointer; transition:transform .18s var(--ease-out),background .18s ease; }
+.contact-submit:hover { transform:translateY(-3px); background:#ff9250; }
+.contact-submit:active { transform:scale(.97); }
+.contact-success { display:flex; flex-direction:column; align-items:flex-start; min-height:245px; padding:30px; color:var(--navy); background:#fff; box-shadow:18px 18px 0 rgba(239,127,45,.9); }
+.contact-success > svg { color:var(--orange); margin-bottom:15px; }
+.contact-success strong { font-family:"Space Grotesk",sans-serif; font-size:27px; font-weight:500; }
+.contact-success p { max-width:470px; margin:10px 0 24px; color:var(--muted); line-height:1.7; font-size:13px; }
+.contact-success button { padding:0; color:var(--orange); border-bottom:1px solid var(--orange); background:transparent; font-size:11px; font-weight:800; cursor:pointer; }
+.contact-direct { display:flex; align-items:center; gap:22px; margin-top:25px; color:rgba(255,255,255,.62); font-size:11px; }
+.contact-direct a { display:inline-flex; align-items:center; gap:6px; color:#fff; font-weight:800; transition:color .18s ease; }
+.contact-direct a:hover { color:var(--orange); }
+@media (max-width:900px) { .contact-section-heading { grid-template-columns:1fr; gap:35px; } .contact-section-heading p { margin:0; padding:25px 0 0; border-left:0; border-top:1px solid rgba(255,255,255,.18); } }
+@media (max-width:640px) { .contact-form-wrap { margin-top:40px; } .contact-form { padding:20px; box-shadow:8px 8px 0 rgba(239,127,45,.9); } .contact-form-row { grid-template-columns:1fr; gap:0; } .contact-form-footer { align-items:flex-start; flex-direction:column; } .contact-submit { width:100%; justify-content:center; } .contact-success { padding:22px; box-shadow:8px 8px 0 rgba(239,127,45,.9); } .contact-direct { align-items:flex-start; flex-direction:column; gap:12px; } }
