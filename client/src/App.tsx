@@ -51,7 +51,7 @@ export function SiteFooter() {
         <div><LogoMark inverted /><p className="footer-description">Territórios pensados para viver. Construção com visão angolana.</p></div>
         <div className="footer-column"><span className="footer-label">Explorar</span><Link href="/">A JOCACH</Link><Link href="/servicos">Serviços</Link><Link href="/projetos">Projetos</Link></div>
         <div className="footer-column"><span className="footer-label">Contactos</span><a href="https://www.google.com/maps/search/?api=1&query=Soyo%2C+Zaire%2C+Angola" target="_blank" rel="noreferrer"><MapPin size={15} /> Soyo, Zaire</a><a href="mailto:geral@jocach.com">geral@jocach.com</a><a href="https://wa.me/244923879645" target="_blank" rel="noreferrer"><Phone size={15} /> +244 923 879 645</a></div>
-        <div className="footer-column footer-business"><span className="footer-label">Ecossistema JOCACH</span><p>Outros negócios ligados à JOCACH Lda serão apresentados em páginas próprias.</p><span className="footer-coming">Em breve · Hamburgaria Broda</span></div>
+        <div className="footer-column footer-business"><span className="footer-label">Ecossistema JOCACH</span><p>Outros negócios ligados à JOCACH Lda, com identidade e páginas próprias.</p><Link href="/broda" className="footer-coming">Conhecer · Hamburgaria Broda <ArrowUpRight size={13} /></Link></div>
       </div>
       <div className="container footer-bottom"><span>© {new Date().getFullYear()} JOCACH Lda. Todos os direitos reservados.</span><span>Construção · Urbanização · Futuro</span></div>
     </footer>
