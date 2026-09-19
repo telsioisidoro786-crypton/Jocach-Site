@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, Route, Switch, useLocation } from "wouter";
-import { ArrowUpRight, Building2, ChevronRight, CircleArrowOutUpRight, Compass, HardHat, MapPin, Menu, Phone, Ruler, X } from "lucide-react";
+import { ArrowUpRight, Building2, ChevronRight, CircleArrowOutUpRight, Compass, HardHat, MapPin, Menu, MessageCircle, Phone, Ruler, X } from "lucide-react";
 import { MapView } from "./components/Map";
 import CookieConsent from "./components/CookieConsent";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Projects from "./pages/Projects";
 import Broda from "./pages/Broda";
+import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 
 const MAP_CENTER = { lat: -6.1349, lng: 12.3689 };
@@ -54,7 +55,7 @@ export function SiteFooter() {
         <div className="footer-column"><span className="footer-label">Contactos</span><a href="https://www.google.com/maps/search/?api=1&query=Soyo%2C+Zaire%2C+Angola" target="_blank" rel="noreferrer"><MapPin size={15} /> Soyo, Zaire</a><a href="mailto:geral@jocach.com">geral@jocach.com</a><a href="https://wa.me/244923879645" target="_blank" rel="noreferrer"><Phone size={15} /> +244 923 879 645</a></div>
         <div className="footer-column footer-business"><span className="footer-label">Ecossistema JOCACH</span><p>Outros negócios ligados à JOCACH Lda, com identidade e páginas próprias.</p><Link href="/broda" className="footer-coming">Conhecer · Hamburgaria Broda <ArrowUpRight size={13} /></Link></div>
       </div>
-      <div className="container footer-bottom"><span>© {new Date().getFullYear()} JOCACH Lda. Todos os direitos reservados.</span><span>Construção · Urbanização · Futuro</span></div>
+      <div className="container footer-bottom"><span>© {new Date().getFullYear()} JOCACH Lda. Todos os direitos reservados.</span><span><Link href="/privacidade">Privacidade e cookies</Link> · Construção · Urbanização · Futuro</span></div>
     </footer>
   );
 }
@@ -75,10 +76,12 @@ export function LocationBlock() {
 }
 
 function AppRouter() {
-  return <Switch><Route path="/" component={Home} /><Route path="/servicos" component={Services} /><Route path="/projetos" component={Projects} /><Route path="/broda" component={Broda} /><Route component={NotFound} /></Switch>;
+  return <Switch><Route path="/" component={Home} /><Route path="/servicos" component={Services} /><Route path="/projetos" component={Projects} /><Route path="/broda" component={Broda} /><Route path="/privacidade" component={Privacy} /><Route component={NotFound} /></Switch>;
 }
 
-export default function App() { return <ThemeProvider defaultTheme="light"><AppRouter /><CookieConsent /></ThemeProvider>; }
+export function WhatsAppFloat() { return <a className="whatsapp-float" href="https://wa.me/244923879645" target="_blank" rel="noreferrer" aria-label="Falar com a JOCACH no WhatsApp"><MessageCircle size={22} /><span>WhatsApp</span></a>; }
+
+export default function App() { return <ThemeProvider defaultTheme="light"><AppRouter /><CookieConsent /><WhatsAppFloat /></ThemeProvider>; }
 
 export const ServiceIcon = ({ type }: { type: string }) => { const icons: Record<string, typeof Ruler> = { loteamento: Compass, urbanizacao: Building2, croquis: Ruler, licenca: HardHat }; const Icon = icons[type] || CircleArrowOutUpRight; return <Icon size={22} strokeWidth={1.6} />; };
 export const ArrowLink = ({ href, children }: { href: string; children: React.ReactNode }) => <a className="arrow-link" href={href}>{children}<ChevronRight size={17} /></a>;
