@@ -2,7 +2,7 @@ import { ArrowUpRight, CalendarDays, MapPin } from "lucide-react";
 import { Link } from "wouter";
 import { ArrowLink, SectionIntro, SiteFooter, SiteHeader } from "../App";
 
-const PROJECT_IMAGE = "/manus-storage/jocach-projects_60e76414.jpg";
+const PROJECT_IMAGE = "/images/jocach-projects.jpg";
 const projects = [
   { number: "01", title: "Bairro Fino", type: "Urbanização residencial", status: "Em curso", description: "Uma nova frente residencial pensada para unir organização urbana, conforto e identidade." },
   { number: "02", title: "Bairro Militar", type: "Residências & infraestrutura", status: "Em curso", description: "Um projeto de escala urbana com foco em conectividade, acessos e qualidade de vida." },
