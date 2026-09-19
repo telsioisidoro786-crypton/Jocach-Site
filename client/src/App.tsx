@@ -50,7 +50,7 @@ export function SiteFooter() {
       <div className="container footer-grid">
         <div><LogoMark inverted /><p className="footer-description">Territórios pensados para viver. Construção com visão angolana.</p></div>
         <div className="footer-column"><span className="footer-label">Explorar</span><Link href="/">A JOCACH</Link><Link href="/servicos">Serviços</Link><Link href="/projetos">Projetos</Link></div>
-        <div className="footer-column"><span className="footer-label">Contactos</span><a href="https://www.google.com/maps/search/?api=1&query=Soyo%2C+Zaire%2C+Angola" target="_blank" rel="noreferrer"><MapPin size={15} /> Soyo, Zaire</a><a href="mailto:geral@jocach.ao">geral@jocach.ao</a><a href="tel:+244000000000">+244 000 000 000</a></div>
+        <div className="footer-column"><span className="footer-label">Contactos</span><a href="https://www.google.com/maps/search/?api=1&query=Soyo%2C+Zaire%2C+Angola" target="_blank" rel="noreferrer"><MapPin size={15} /> Soyo, Zaire</a><a href="mailto:geral@jocach.com">geral@jocach.com</a><a href="https://wa.me/244923879645" target="_blank" rel="noreferrer"><Phone size={15} /> +244 923 879 645</a></div>
         <div className="footer-column footer-business"><span className="footer-label">Ecossistema JOCACH</span><p>Outros negócios ligados à JOCACH Lda serão apresentados em páginas próprias.</p><span className="footer-coming">Em breve · Hamburgaria Broda</span></div>
       </div>
       <div className="container footer-bottom"><span>© {new Date().getFullYear()} JOCACH Lda. Todos os direitos reservados.</span><span>Construção · Urbanização · Futuro</span></div>
@@ -81,5 +81,5 @@ export default function App() { return <ThemeProvider defaultTheme="light"><AppR
 
 export const ServiceIcon = ({ type }: { type: string }) => { const icons: Record<string, typeof Ruler> = { loteamento: Compass, urbanizacao: Building2, croquis: Ruler, licenca: HardHat }; const Icon = icons[type] || CircleArrowOutUpRight; return <Icon size={22} strokeWidth={1.6} />; };
 export const ArrowLink = ({ href, children }: { href: string; children: React.ReactNode }) => <a className="arrow-link" href={href}>{children}<ChevronRight size={17} /></a>;
-export const ContactLink = () => <a className="contact-link" href="mailto:geral@jocach.ao"><Phone size={16} /> Solicitar proposta</a>;
+export const ContactLink = () => <a className="contact-link" href="mailto:geral@jocach.com"><Phone size={16} /> Solicitar proposta</a>;
 export { MAP_CENTER };
