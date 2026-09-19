@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowLeft, ArrowUpRight, Clock3, MapPin, Star } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowUpRight, CalendarDays, Clock3, MapPin, Star } from "lucide-react";
 import { Link } from "wouter";
 import { SiteFooter, SiteHeader } from "../App";
 
@@ -12,7 +12,20 @@ const menu = [
   { tag: "Para partilhar", name: "Broda Fries", description: "Batata dourada, cheddar, bacon e o toque secreto da casa.", price: "2.500 Kz" },
 ];
 
+const weeklyPromotions = [
+  { label: "Oferta da semana", title: "Terça do Cheddar", description: "Pede o Broda Cheddar e junta batata dourada por conta da casa.", detail: "Todas as terças", accent: "yellow" },
+  { label: "Combo Broda", title: "Dupla que combina", description: "Dois Broda Originals + duas bebidas frias para dividir com quem é teu.", detail: "Quinta a domingo", accent: "cream" },
+  { label: "Hora do Broda", title: "Final feliz", description: "A partir das 18h, adiciona fries com cheddar ao teu pedido por mais 500 Kz.", detail: "Todos os dias · 18h — 20h", accent: "blue" },
+];
+
+function getWeekOfYear(date: Date) {
+  const start = new Date(date.getFullYear(), 0, 1);
+  const days = Math.floor((date.getTime() - start.getTime()) / 86400000);
+  return Math.floor((days + start.getDay() + 6) / 7);
+}
+
 export default function Broda() {
+  const promotion = weeklyPromotions[getWeekOfYear(new Date()) % weeklyPromotions.length];
   return (
     <div className="broda-page">
       <section className="broda-hero" style={{ "--broda-hero": `url(${BRODA_HERO})` } as React.CSSProperties}>
@@ -32,6 +45,14 @@ export default function Broda() {
 
       <section className="broda-intro">
         <div className="container broda-intro-grid"><span className="broda-side-label">BRODA / DESDE 2026</span><div><span className="broda-kicker broda-kicker-dark"><span />Uma hamburgaria com identidade</span><h2>Simples no prato.<br /><em>Forte na memória.</em></h2><p>Na Hamburgaria Broda, o bom sabor encontra uma energia leve, urbana e angolana. É para vir com os amigos, ficar mais um bocado e pedir só mais uma batata.</p><div className="broda-values"><span><strong>01</strong> Carne suculenta</span><span><strong>02</strong> Molhos da casa</span><span><strong>03</strong> Ambiente sem cerimónia</span></div></div></div>
+      </section>
+
+      <section className={`broda-promo broda-promo-${promotion.accent}`} aria-labelledby="broda-promo-title">
+        <div className="container broda-promo-grid">
+          <div className="broda-promo-label"><span className="broda-promo-label-icon"><Star size={17} fill="currentColor" /></span><span>Broda<br /><strong>Weekly</strong></span></div>
+          <div className="broda-promo-main"><span className="broda-kicker broda-kicker-promo"><span />{promotion.label}</span><h2 id="broda-promo-title">{promotion.title}</h2><p>{promotion.description}</p><div className="broda-promo-meta"><span><CalendarDays size={15} /> {promotion.detail}</span><span className="broda-promo-cycle">Oferta rotativa semanal</span></div></div>
+          <a className="broda-promo-action" href="#menu">Quero esta oferta <ArrowUpRight size={18} /></a>
+        </div>
       </section>
 
       <section id="menu" className="broda-menu"><div className="container"><div className="broda-section-heading"><div><span className="broda-kicker"><span />O que sai da chapa</span><h2>Escolhe o teu <em>Broda.</em></h2></div><span className="broda-menu-note">Menu sujeito à disponibilidade do dia.</span></div><div className="broda-menu-grid">{menu.map((item, index) => <article className="broda-menu-card" key={item.name}><div className="broda-menu-card-top"><span>0{index + 1}</span><span className="broda-menu-tag">{item.tag}</span></div><h3>{item.name}</h3><p>{item.description}</p><div className="broda-menu-card-bottom"><strong>{item.price}</strong><span><ArrowUpRight size={16} /></span></div></article>)}</div></div></section>

@@ -101,3 +101,30 @@
 .broda-page .site-footer { background:#06162f; }
 @media (max-width:900px) { .broda-hero-badge { margin-right:2%; } .broda-menu-grid { grid-template-columns:repeat(2,1fr); } .broda-menu-card:nth-child(3) { border-left:1px solid rgba(255,255,255,.36); } .broda-story-grid,.broda-cta-inner { grid-template-columns:1fr; gap:52px; } .broda-story-copy { max-width:580px; } .broda-cta-copy { padding-left:0; padding-top:30px; border-left:0; border-top:1px solid rgba(255,245,229,.22); } }
 @media (max-width:640px) { .broda-hero { min-height:730px; background-position:62% center; } .broda-hero-content { align-items:flex-end; padding-top:45px; } .broda-hero-copy { padding-bottom:50px; } .broda-hero h1 { font-size:clamp(55px,15vw,84px); } .broda-hero-copy > p { font-size:14px; } .broda-actions { align-items:flex-start; flex-direction:column; gap:19px; } .broda-hero-badge { display:none; } .broda-hero-bottom { padding-bottom:18px; } .broda-hero-bottom span:first-child { font-size:8px; } .broda-intro { padding:88px 0 96px; } .broda-intro-grid { grid-template-columns:27px 1fr; gap:19px; } .broda-intro h2,.broda-story-copy h2,.broda-cta h2 { font-size:51px; } .broda-menu { padding:88px 0 96px; } .broda-section-heading { align-items:flex-start; flex-direction:column; gap:18px; margin-bottom:42px; } .broda-menu-grid { grid-template-columns:1fr; } .broda-menu-card { min-height:255px; border-left:1px solid rgba(255,255,255,.36); } .broda-menu-card h3 { margin-top:56px; } .broda-story { padding:88px 0; } .broda-story-image,.broda-story-image img { min-height:350px; } .broda-cta { padding:80px 0; } .broda-group-line { align-items:flex-start; flex-direction:column; gap:10px; line-height:1.5; } }
+
+.broda-promo { position:relative; overflow:hidden; padding:54px 0; background:var(--broda-yellow); color:var(--broda-charcoal); }
+.broda-promo::after { content:""; position:absolute; right:-8%; top:-65%; width:47%; aspect-ratio:1; border:1px solid rgba(23,23,23,.18); border-radius:50%; box-shadow:0 0 0 26px rgba(23,23,23,.05),0 0 0 52px rgba(23,23,23,.04); transform:rotate(-17deg); pointer-events:none; }
+.broda-promo-cream { background:var(--broda-cream); }
+.broda-promo-blue { background:var(--broda-cobalt); color:#fff; }
+.broda-promo-grid { position:relative; z-index:1; display:grid; grid-template-columns:150px 1fr auto; align-items:center; gap:42px; }
+.broda-promo-label { display:flex; align-items:center; gap:11px; color:var(--broda-orange); font-size:10px; line-height:1.12; font-weight:800; letter-spacing:.15em; text-transform:uppercase; }
+.broda-promo-blue .broda-promo-label { color:var(--broda-yellow); }
+.broda-promo-label-icon { display:grid; place-items:center; width:39px; height:39px; color:var(--broda-yellow); background:var(--broda-charcoal); border-radius:50%; }
+.broda-promo-label strong { font-family:"Space Grotesk",sans-serif; font-size:16px; letter-spacing:.04em; }
+.broda-promo-main { max-width:650px; }
+.broda-kicker-promo { color:var(--broda-orange); }
+.broda-promo-blue .broda-kicker-promo { color:var(--broda-yellow); }
+.broda-promo-main h2 { margin:10px 0 7px; font-family:"Space Grotesk",sans-serif; font-size:clamp(30px,3.5vw,48px); line-height:.95; letter-spacing:-.055em; font-weight:500; }
+.broda-promo-main p { max-width:520px; margin:0; color:rgba(23,23,23,.7); font-size:13px; line-height:1.6; }
+.broda-promo-blue .broda-promo-main p { color:rgba(255,255,255,.78); }
+.broda-promo-meta { display:flex; flex-wrap:wrap; align-items:center; gap:16px; margin-top:17px; color:rgba(23,23,23,.7); font-size:10px; font-weight:800; }
+.broda-promo-blue .broda-promo-meta { color:rgba(255,255,255,.78); }
+.broda-promo-meta span { display:inline-flex; align-items:center; gap:6px; }
+.broda-promo-meta svg { color:var(--broda-orange); }
+.broda-promo-blue .broda-promo-meta svg { color:var(--broda-yellow); }
+.broda-promo-cycle { padding-left:16px; border-left:1px solid currentColor; opacity:.62; }
+.broda-promo-action { display:inline-flex; align-items:center; gap:9px; min-height:48px; padding:0 17px; color:var(--broda-cream); background:var(--broda-charcoal); font-size:10px; font-weight:800; white-space:nowrap; transition:transform .18s var(--ease-out),background .18s ease; }
+.broda-promo-action:hover { transform:translateY(-3px); background:var(--broda-orange); }
+.broda-promo-blue .broda-promo-action { color:var(--broda-charcoal); background:var(--broda-yellow); }
+@media (max-width:900px) { .broda-promo-grid { grid-template-columns:105px 1fr; gap:25px; } .broda-promo-action { grid-column:2; justify-self:start; } }
+@media (max-width:640px) { .broda-promo { padding:43px 0 47px; } .broda-promo-grid { grid-template-columns:1fr; gap:18px; } .broda-promo-label { order:0; } .broda-promo-main { order:1; } .broda-promo-action { grid-column:auto; order:2; } .broda-promo-main h2 { font-size:39px; } .broda-promo-cycle { border-left:0; padding-left:0; } }
