@@ -182,3 +182,33 @@
 @media (max-width:640px) { .cookie-consent { left:12px; bottom:12px; flex-direction:column; align-items:stretch; gap:16px; width:calc(100vw - 24px); padding:18px; } .cookie-actions { width:100%; } .cookie-actions button { flex:1; } }
 
 .cookie-note { display:block; margin-top:10px; color:rgba(255,255,255,.46); font-size:9px; }
+
+.cookie-policy-link { display:inline-block; margin-top:10px; color:#f5a15f; font-size:10px; font-weight:800; }
+.whatsapp-float { position:fixed; z-index:45; right:24px; bottom:24px; display:inline-flex; align-items:center; gap:9px; padding:13px 16px; color:#fff; background:#169b62; border:1px solid rgba(255,255,255,.5); box-shadow:0 12px 32px rgba(13,103,64,.28); font-size:11px; font-weight:800; letter-spacing:.02em; transition:transform .18s var(--ease-out),box-shadow .18s ease; }
+.whatsapp-float:hover { color:#fff; transform:translateY(-3px); box-shadow:0 16px 38px rgba(13,103,64,.38); }
+.privacy-hero { padding:150px 0 92px; color:#fff; background:linear-gradient(118deg,#071936 0%,#0d3c78 100%); }
+.privacy-hero-inner { max-width:920px; }
+.privacy-hero h1 { max-width:760px; margin:22px 0 20px; font-family:"Space Grotesk",sans-serif; font-size:clamp(48px,7vw,92px); font-weight:400; letter-spacing:-.07em; line-height:.92; }
+.privacy-hero h1 em { color:#f08a43; font-style:normal; }
+.privacy-hero p { max-width:520px; color:rgba(255,255,255,.7); font-size:15px; line-height:1.7; }
+.privacy-date { display:block; margin-top:38px; color:#f5a15f; font-size:10px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+.privacy-content { background:#f5f7fb; }
+.privacy-layout { display:grid; grid-template-columns:minmax(180px,260px) minmax(0,680px); gap:clamp(44px,9vw,130px); align-items:start; }
+.privacy-aside { position:sticky; top:116px; display:flex; flex-direction:column; gap:15px; color:#0b254c; font-size:12px; line-height:1.45; }
+.privacy-aside-icon { display:grid; place-items:center; width:50px; height:50px; color:#f08a43; background:#fff; border:1px solid #e5eaf2; }
+.privacy-aside strong { color:#f08a43; font-weight:700; }
+.privacy-aside a { display:inline-flex; align-items:center; gap:7px; margin-top:14px; color:#0b254c; font-size:11px; font-weight:800; }
+.privacy-copy { color:#33435a; }
+.privacy-lead { margin:0 0 48px; color:#0b254c; font-family:"Space Grotesk",sans-serif; font-size:22px; line-height:1.35; letter-spacing:-.025em; }
+.privacy-copy section { padding:0 0 29px; margin:0 0 28px; border-bottom:1px solid #dbe2ec; }
+.privacy-copy h2 { margin:0 0 12px; color:#0b254c; font-family:"Space Grotesk",sans-serif; font-size:21px; font-weight:600; letter-spacing:-.035em; }
+.privacy-copy p { margin:0; font-size:14px; line-height:1.85; }
+.privacy-copy a { color:#e47935; font-weight:700; }
+.privacy-contact { padding:25px 26px; color:#fff; background:#0b254c; }
+.privacy-contact strong { display:block; margin-bottom:8px; font-family:"Space Grotesk",sans-serif; font-size:20px; font-weight:500; }
+.privacy-contact p { color:rgba(255,255,255,.72); }
+.privacy-contact a { color:#f5a15f; }
+.privacy-back { padding:25px 0; background:#fff; }
+.privacy-back a { display:inline-flex; align-items:center; gap:8px; color:#0b254c; font-size:11px; font-weight:800; }
+.footer-bottom a { color:inherit; }
+@media (max-width:760px) { .whatsapp-float { right:14px; bottom:14px; width:48px; height:48px; padding:0; border-radius:50%; justify-content:center; } .whatsapp-float span { display:none; } .privacy-hero { padding:116px 0 68px; } .privacy-layout { grid-template-columns:1fr; gap:36px; } .privacy-aside { position:static; } .privacy-lead { font-size:20px; } }
