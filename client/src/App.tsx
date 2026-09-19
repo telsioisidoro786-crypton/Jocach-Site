@@ -18,7 +18,7 @@ export function LogoMark({ inverted = false }: { inverted?: boolean }) {
     <div className={`brand-lockup ${inverted ? "brand-lockup-inverted" : ""}`} aria-label="JOCACH Lda">
       <img
         className="brand-logo-image"
-        src="/images/jocach-logo.jpeg"
+        src={inverted ? "/images/jocach-logo-white.png" : "/images/jocach-logo.jpeg"}
         alt="JOCACH Lda — Prestação de Serviços e Comércio"
       />
     </div>
