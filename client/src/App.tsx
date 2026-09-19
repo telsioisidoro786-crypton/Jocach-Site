@@ -16,8 +16,11 @@ const MAP_CENTER = { lat: -6.1349, lng: 12.3689 };
 export function LogoMark({ inverted = false }: { inverted?: boolean }) {
   return (
     <div className={`brand-lockup ${inverted ? "brand-lockup-inverted" : ""}`} aria-label="JOCACH Lda">
-      <span className="brand-mark" aria-hidden="true"><span className="brand-mark-j">J</span><span className="brand-mark-line" /></span>
-      <span className="brand-name"><strong>JOCACH</strong><small>PRESTAÇÃO DE SERVIÇO E COMÉRCIO</small></span>
+      <img
+        className="brand-logo-image"
+        src="/images/jocach-logo.jpeg"
+        alt="JOCACH Lda — Prestação de Serviços e Comércio"
+      />
     </div>
   );
 }
