@@ -2,8 +2,8 @@ import { ArrowDown, ArrowLeft, ArrowUpRight, CalendarDays, Clock3, MapPin, Star 
 import { Link } from "wouter";
 import { SiteFooter, SiteHeader } from "../App";
 
-const BRODA_HERO = "/manus-storage/broda-hero_b7c45ece.jpg";
-const BRODA_INTERIOR = "/manus-storage/broda-interior_2ddce264.jpg";
+const BRODA_HERO = "/images/broda-hero.jpg";
+const BRODA_INTERIOR = "/images/broda-interior.jpg";
 
 const menu = [
   { tag: "O clássico", name: "Broda Original", description: "Carne smash, queijo, pickles, cebola e molho Broda no pão brioche.", price: "3.500 Kz" },
@@ -59,7 +59,7 @@ export default function Broda() {
 
       <section className="broda-story"><div className="container broda-story-grid"><div className="broda-story-image"><img src={BRODA_INTERIOR} alt="Interior acolhedor da Hamburgaria Broda" /><div className="broda-image-stamp">BRODA<br /><strong>SOYO</strong></div></div><div className="broda-story-copy"><span className="broda-kicker broda-kicker-dark"><span />O lugar</span><h2>Chega com fome.<br /><em>Fica pela vibe.</em></h2><p>Uma hamburgaria pensada para a cidade: balcão rápido, mesas para conversa e um ambiente que mistura o urbano com o calor de casa.</p><div className="broda-opening"><div><Clock3 size={18} /><span><strong>Horário</strong>Segunda a domingo · 11h — 22h</span></div><div><MapPin size={18} /><span><strong>Localização</strong>Soyo · Zaire · Angola</span></div></div><a className="broda-button broda-button-dark" href="https://www.google.com/maps/search/?api=1&query=Soyo%2C+Zaire%2C+Angola" target="_blank" rel="noreferrer">Abrir no Google Maps <ArrowUpRight size={16} /></a></div></div></section>
 
-      <section id="onde-estamos" className="broda-cta"><div className="container broda-cta-inner"><div><span className="broda-kicker"><span />Faz parte da família</span><h2>O próximo Broda<br /><em>é contigo.</em></h2></div><div className="broda-cta-copy"><p>Queres levar a Broda para um novo ponto? Fala connosco e vamos conversar sobre o próximo capítulo.</p><a className="broda-button broda-button-main" href="mailto:geral@jocach.ao?subject=Hamburgaria%20Broda">Falar com a Broda <ArrowUpRight size={16} /></a></div></div></section>
+      <section id="onde-estamos" className="broda-cta"><div className="container broda-cta-inner"><div><span className="broda-kicker"><span />Faz parte da família</span><h2>O próximo Broda<br /><em>é contigo.</em></h2></div><div className="broda-cta-copy"><p>Queres levar a Broda para um novo ponto? Fala connosco e vamos conversar sobre o próximo capítulo.</p><a className="broda-button broda-button-main" href="mailto:geral@jocach.com?subject=Hamburgaria%20Broda">Falar com a Broda <ArrowUpRight size={16} /></a></div></div></section>
 
       <section className="broda-group-link"><div className="container"><Link href="/" className="broda-back-link"><ArrowLeft size={15} /> Voltar ao site da JOCACH</Link><div className="broda-group-line"><span>Hamburgaria Broda</span><span>Uma marca ligada à JOCACH Lda · Construção, urbanização e novos negócios</span></div></div></section>
       <SiteFooter />
