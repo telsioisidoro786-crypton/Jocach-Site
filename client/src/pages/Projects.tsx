@@ -1,16 +1,170 @@
 import { ArrowUpRight, CalendarDays, MapPin } from "lucide-react";
 import { Link } from "wouter";
 import { ArrowLink, SectionIntro, SiteFooter, SiteHeader } from "../App";
+import Seo from "../components/Seo";
 
 const PROJECT_IMAGE = "/images/jocach-projects.jpg";
 const projects = [
-  { number: "01", title: "Bairro Fina", type: "Urbanização residencial", status: "Em curso", description: "Uma nova frente residencial pensada para unir organização urbana, conforto e identidade." },
-  { number: "02", title: "Bairro Militar", type: "Residências & infraestrutura", status: "Em curso", description: "Um projeto de escala urbana com foco em conectividade, acessos e qualidade de vida." },
-  { number: "03", title: "Bairro Pinda", type: "Loteamento", status: "Em curso", description: "Território preparado para crescer com estrutura e possibilidade de futuro." },
-  { number: "04", title: "Lumueno", type: "Conceito urbano", status: "Em curso", description: "Uma visão contemporânea para um lugar com potencial de se tornar referência." },
-  { number: "05", title: "Bairro Kintambi", type: "Expansão urbana", status: "Em curso", description: "Uma nova frente de crescimento pensada para ligar habitação, acessos e futuro." },
+  {
+    number: "01",
+    title: "Bairro Fina",
+    type: "Urbanização residencial",
+    status: "Em curso",
+    description:
+      "Uma nova frente residencial pensada para unir organização urbana, conforto e identidade.",
+  },
+  {
+    number: "02",
+    title: "Bairro Militar",
+    type: "Residências & infraestrutura",
+    status: "Em curso",
+    description:
+      "Um projeto de escala urbana com foco em conectividade, acessos e qualidade de vida.",
+  },
+  {
+    number: "03",
+    title: "Bairro Pinda",
+    type: "Loteamento",
+    status: "Em curso",
+    description:
+      "Território preparado para crescer com estrutura e possibilidade de futuro.",
+  },
+  {
+    number: "04",
+    title: "Lumueno",
+    type: "Conceito urbano",
+    status: "Em curso",
+    description:
+      "Uma visão contemporânea para um lugar com potencial de se tornar referência.",
+  },
+  {
+    number: "05",
+    title: "Bairro Kintambi",
+    type: "Expansão urbana",
+    status: "Em curso",
+    description:
+      "Uma nova frente de crescimento pensada para ligar habitação, acessos e futuro.",
+  },
 ];
 
 export default function Projects() {
-  return <div className="site-shell inner-page"><SiteHeader /><section className="inner-hero inner-hero-projects"><div className="container inner-hero-grid"><div><span className="eyebrow eyebrow-light"><span className="eyebrow-dot" />Projetos em curso</span><h1>Desenhar hoje<br /><em>a cidade de amanhã.</em></h1></div><p>Conheça os territórios onde a visão da JOCACH já está a ganhar forma.</p></div></section><main><section className="projects-intro section-pad"><div className="container projects-intro-grid"><span className="vertical-index">02 / 05</span><SectionIntro eyebrow="Uma visão em movimento" title="Projetos que começam no território." body="Cada iniciativa é uma oportunidade de criar mais do que edifícios: criar relações, rotinas e uma nova escala de pertença." /></div></section><section className="project-showcase"><div className="container project-showcase-grid"><div className="showcase-image"><img src={PROJECT_IMAGE} alt="Vista de arquitetura e urbanização contemporânea" /><div className="showcase-stamp"><span>JOCACH</span><strong>01</strong></div></div><div className="showcase-copy"><span className="eyebrow"><span className="eyebrow-dot" />Projeto em destaque</span><h2>Bairro Fina</h2><p>Uma urbanização desenhada para o movimento natural da vida: ruas que conectam, casas que acolhem e uma paisagem urbana que se reconhece.</p><div className="showcase-meta"><span><MapPin size={15} /> Soyo, Zaire</span><span><CalendarDays size={15} /> Em curso</span></div><ArrowLink href="/#contacto">Falar sobre este projeto</ArrowLink></div></div></section><section className="project-catalog section-pad"><div className="container"><div className="catalog-heading"><SectionIntro eyebrow="Portfólio em construção" title="Cinco frentes. Uma mesma visão." /><span>2026 — presente</span></div><div className="project-catalog-list">{projects.map((project) => <article className="catalog-row" key={project.number}><span className="catalog-number">{project.number}</span><div className="catalog-title"><h3>{project.title}</h3><span>{project.type}</span></div><p>{project.description}</p><span className="catalog-status"><i />{project.status}</span><ArrowUpRight size={20} /></article>)}</div></div></section><section className="simple-cta section-pad"><div className="container simple-cta-inner"><div><span className="eyebrow"><span className="eyebrow-dot" />O seu projeto pode ser o próximo</span><h2>Tem uma ideia para o Soyo?</h2></div><Link className="button button-navy" href="/#contacto">Falar com a JOCACH <ArrowUpRight size={16} /></Link></div></section></main><SiteFooter /></div>;
+  return (
+    <div className="site-shell inner-page">
+      <Seo
+        title="Projetos de Urbanização no Soyo — JOCACH Lda"
+        description="Conheça os projetos de urbanização, loteamento e expansão urbana em curso da JOCACH no Soyo, Zaire."
+        path="/projetos"
+        image="https://jocach.com/images/jocach-projects.jpg"
+      />
+      <SiteHeader />
+      <section className="inner-hero inner-hero-projects">
+        <div className="container inner-hero-grid">
+          <div>
+            <span className="eyebrow eyebrow-light">
+              <span className="eyebrow-dot" />
+              Projetos em curso
+            </span>
+            <h1>
+              Desenhar hoje
+              <br />
+              <em>a cidade de amanhã.</em>
+            </h1>
+          </div>
+          <p>
+            Conheça os territórios onde a visão da JOCACH já está a ganhar
+            forma.
+          </p>
+        </div>
+      </section>
+      <main>
+        <section className="projects-intro section-pad">
+          <div className="container projects-intro-grid">
+            <span className="vertical-index">02 / 05</span>
+            <SectionIntro
+              eyebrow="Uma visão em movimento"
+              title="Projetos que começam no território."
+              body="Cada iniciativa é uma oportunidade de criar mais do que edifícios: criar relações, rotinas e uma nova escala de pertença."
+            />
+          </div>
+        </section>
+        <section className="project-showcase">
+          <div className="container project-showcase-grid">
+            <div className="showcase-image">
+              <img
+                src={PROJECT_IMAGE}
+                alt="Vista de arquitetura e urbanização contemporânea"
+              />
+              <div className="showcase-stamp">
+                <span>JOCACH</span>
+                <strong>01</strong>
+              </div>
+            </div>
+            <div className="showcase-copy">
+              <span className="eyebrow">
+                <span className="eyebrow-dot" />
+                Projeto em destaque
+              </span>
+              <h2>Bairro Fina</h2>
+              <p>
+                Uma urbanização desenhada para o movimento natural da vida: ruas
+                que conectam, casas que acolhem e uma paisagem urbana que se
+                reconhece.
+              </p>
+              <div className="showcase-meta">
+                <span>
+                  <MapPin size={15} /> Soyo, Zaire
+                </span>
+                <span>
+                  <CalendarDays size={15} /> Em curso
+                </span>
+              </div>
+              <ArrowLink href="/#contacto">Falar sobre este projeto</ArrowLink>
+            </div>
+          </div>
+        </section>
+        <section className="project-catalog section-pad">
+          <div className="container">
+            <div className="catalog-heading">
+              <SectionIntro
+                eyebrow="Portfólio em construção"
+                title="Cinco frentes. Uma mesma visão."
+              />
+              <span>2026 — presente</span>
+            </div>
+            <div className="project-catalog-list">
+              {projects.map(project => (
+                <article className="catalog-row" key={project.number}>
+                  <span className="catalog-number">{project.number}</span>
+                  <div className="catalog-title">
+                    <h3>{project.title}</h3>
+                    <span>{project.type}</span>
+                  </div>
+                  <p>{project.description}</p>
+                  <span className="catalog-status">
+                    <i />
+                    {project.status}
+                  </span>
+                  <ArrowUpRight size={20} />
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+        <section className="simple-cta section-pad">
+          <div className="container simple-cta-inner">
+            <div>
+              <span className="eyebrow">
+                <span className="eyebrow-dot" />O seu projeto pode ser o próximo
+              </span>
+              <h2>Tem uma ideia para o Soyo?</h2>
+            </div>
+            <Link className="button button-navy" href="/#contacto">
+              Falar com a JOCACH <ArrowUpRight size={16} />
+            </Link>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </div>
+  );
 }

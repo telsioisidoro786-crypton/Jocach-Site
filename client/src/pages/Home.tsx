@@ -21,6 +21,7 @@ import {
   SiteFooter,
   SiteHeader,
 } from "../App";
+import Seo from "../components/Seo";
 
 const HERO_IMAGE = "/images/jocach-hero.jpg";
 const PROJECT_IMAGE = "/images/jocach-projects.jpg";
@@ -180,6 +181,11 @@ function ContactForm() {
 export default function Home() {
   return (
     <div className="site-shell">
+      <Seo
+        title="JOCACH Lda — Construção e Urbanização no Soyo"
+        description="Construção civil, urbanização, loteamento e residências com visão local e duradoura no Soyo, Zaire, Angola."
+        path="/"
+      />
       <section
         className="hero"
         style={{ "--hero-image": `url(${HERO_IMAGE})` } as React.CSSProperties}
@@ -282,32 +288,49 @@ export default function Home() {
           </div>
           <div className="purpose-grid">
             <article className="purpose-card purpose-card-featured">
-              <div className="purpose-card-icon"><Target size={23} /></div>
+              <div className="purpose-card-icon">
+                <Target size={23} />
+              </div>
               <span className="purpose-card-label">01 · Missão</span>
               <h3>Dar forma a lugares onde a vida possa acontecer melhor.</h3>
               <p>
-                Desenvolver soluções de construção, urbanização e habitação
-                com qualidade, responsabilidade e atenção às necessidades das
+                Desenvolver soluções de construção, urbanização e habitação com
+                qualidade, responsabilidade e atenção às necessidades das
                 pessoas e do território.
               </p>
             </article>
             <article className="purpose-card">
-              <div className="purpose-card-icon"><Eye size={23} /></div>
+              <div className="purpose-card-icon">
+                <Eye size={23} />
+              </div>
               <span className="purpose-card-label">02 · Visão</span>
-              <h3>Ser uma referência angolana na construção de territórios com futuro.</h3>
+              <h3>
+                Ser uma referência angolana na construção de territórios com
+                futuro.
+              </h3>
               <p>
                 Queremos contribuir para um Soyo mais organizado, contemporâneo
                 e próspero, levando esta visão a novos lugares de Angola.
               </p>
             </article>
             <article className="purpose-card purpose-values-card">
-              <div className="purpose-card-icon"><Handshake size={23} /></div>
+              <div className="purpose-card-icon">
+                <Handshake size={23} />
+              </div>
               <span className="purpose-card-label">03 · Valores</span>
               <div className="purpose-values">
-                <span><strong>01</strong> Integridade e confiança</span>
-                <span><strong>02</strong> Excelência na execução</span>
-                <span><strong>03</strong> Respeito pelo território</span>
-                <span><strong>04</strong> Proximidade com as pessoas</span>
+                <span>
+                  <strong>01</strong> Integridade e confiança
+                </span>
+                <span>
+                  <strong>02</strong> Excelência na execução
+                </span>
+                <span>
+                  <strong>03</strong> Respeito pelo território
+                </span>
+                <span>
+                  <strong>04</strong> Proximidade com as pessoas
+                </span>
               </div>
             </article>
           </div>

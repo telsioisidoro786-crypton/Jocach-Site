@@ -1,6 +1,7 @@
 import { ArrowLeft, ArrowUpRight, ShieldCheck } from "lucide-react";
 import { Link } from "wouter";
 import { SiteFooter, SiteHeader } from "../App";
+import Seo from "../components/Seo";
 
 const sections = [
   {
@@ -34,5 +35,90 @@ const sections = [
 ];
 
 export default function Privacy() {
-  return <div className="site-shell privacy-page"><SiteHeader /><main><section className="privacy-hero"><div className="container privacy-hero-inner"><span className="eyebrow eyebrow-light"><span className="eyebrow-dot" />Privacidade · JOCACH Lda</span><h1>Transparência para<br /><em>construir confiança.</em></h1><p>Como tratamos os dados e as preferências de cookies quando visita o nosso site.</p><span className="privacy-date">Última atualização · 19 de setembro de 2026</span></div></section><section className="privacy-content section-pad"><div className="container privacy-layout"><aside className="privacy-aside"><div className="privacy-aside-icon"><ShieldCheck size={23} /></div><span>Política de Privacidade<br /><strong>e Cookies</strong></span><a href="mailto:geral@jocach.com">Falar com a JOCACH <ArrowUpRight size={15} /></a></aside><article className="privacy-copy"><p className="privacy-lead">Esta política explica, de forma simples, que dados podem ser tratados neste site, para que finalidades e como pode exercer os seus direitos.</p>{sections.map((section) => <section key={section.title}><h2>{section.title}</h2><p>{section.body}</p></section>)}<div className="privacy-contact"><strong>Dúvidas sobre privacidade?</strong><p>Entre em contacto através de <a href="mailto:geral@jocach.com">geral@jocach.com</a> ou pelo WhatsApp <a href="https://wa.me/244923879645" target="_blank" rel="noreferrer">+244 923 879 645</a>.</p></div></article></div></section></main><section className="privacy-back"><div className="container"><Link href="/"><ArrowLeft size={15} /> Voltar ao site da JOCACH</Link></div></section><SiteFooter /></div>;
+  return (
+    <div className="site-shell privacy-page">
+      <Seo
+        title="Política de Privacidade e Cookies — JOCACH Lda"
+        description="Consulte a política de privacidade e cookies da JOCACH Lda, incluindo dados tratados, finalidades e direitos dos visitantes."
+        path="/privacidade"
+      />
+      <SiteHeader />
+      <main>
+        <section className="privacy-hero">
+          <div className="container privacy-hero-inner">
+            <span className="eyebrow eyebrow-light">
+              <span className="eyebrow-dot" />
+              Privacidade · JOCACH Lda
+            </span>
+            <h1>
+              Transparência para
+              <br />
+              <em>construir confiança.</em>
+            </h1>
+            <p>
+              Como tratamos os dados e as preferências de cookies quando visita
+              o nosso site.
+            </p>
+            <span className="privacy-date">
+              Última atualização · 19 de setembro de 2026
+            </span>
+          </div>
+        </section>
+        <section className="privacy-content section-pad">
+          <div className="container privacy-layout">
+            <aside className="privacy-aside">
+              <div className="privacy-aside-icon">
+                <ShieldCheck size={23} />
+              </div>
+              <span>
+                Política de Privacidade
+                <br />
+                <strong>e Cookies</strong>
+              </span>
+              <a href="mailto:geral@jocach.com">
+                Falar com a JOCACH <ArrowUpRight size={15} />
+              </a>
+            </aside>
+            <article className="privacy-copy">
+              <p className="privacy-lead">
+                Esta política explica, de forma simples, que dados podem ser
+                tratados neste site, para que finalidades e como pode exercer os
+                seus direitos.
+              </p>
+              {sections.map(section => (
+                <section key={section.title}>
+                  <h2>{section.title}</h2>
+                  <p>{section.body}</p>
+                </section>
+              ))}
+              <div className="privacy-contact">
+                <strong>Dúvidas sobre privacidade?</strong>
+                <p>
+                  Entre em contacto através de{" "}
+                  <a href="mailto:geral@jocach.com">geral@jocach.com</a> ou pelo
+                  WhatsApp{" "}
+                  <a
+                    href="https://wa.me/244923879645"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    +244 923 879 645
+                  </a>
+                  .
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+      <section className="privacy-back">
+        <div className="container">
+          <Link href="/">
+            <ArrowLeft size={15} /> Voltar ao site da JOCACH
+          </Link>
+        </div>
+      </section>
+      <SiteFooter />
+    </div>
+  );
 }
