@@ -1,9 +1,11 @@
-import { ArrowDown, ArrowUpRight, Building2, Check, HardHat, Ruler, ShieldCheck } from "lucide-react";
+import { useState } from "react";
+import { ArrowDown, ArrowUpRight, Building2, Check, CheckCircle2, HardHat, Ruler, Send, ShieldCheck } from "lucide-react";
 import { Link } from "wouter";
-import { ArrowLink, ContactLink, LocationBlock, SectionIntro, SiteFooter, SiteHeader } from "../App";
+import { ArrowLink, LocationBlock, SectionIntro, SiteFooter, SiteHeader } from "../App";
 
-const HERO_IMAGE = "/manus-storage/jocach-hero_e8ce48bc.jpg";
-const PROJECT_IMAGE = "/manus-storage/jocach-projects_60e76414.jpg";
+const HERO_IMAGE = "/images/jocach-hero.jpg";
+const PROJECT_IMAGE = "/images/jocach-projects.jpg";
+const CONTACT_EMAIL = "geral@jocach.com";
 const services = [
   { number: "01", title: "Loteamento", description: "Leitura de território, planeamento e organização de novas frentes urbanas.", icon: Building2 },
   { number: "02", title: "Urbanização", description: "Espaços habitáveis com infraestrutura, escala humana e visão de futuro.", icon: Ruler },
@@ -11,12 +13,30 @@ const services = [
   { number: "04", title: "Execução", description: "Acompanhamento rigoroso para transformar o desenho em obra construída.", icon: HardHat },
 ];
 
+type ContactFormState = { name: string; email: string; phone: string; project: string; message: string };
+const initialContactForm: ContactFormState = { name: "", email: "", phone: "", project: "", message: "" };
+
+function ContactForm() {
+  const [form, setForm] = useState<ContactFormState>(initialContactForm);
+  const [sent, setSent] = useState(false);
+  const updateField = (field: keyof ContactFormState, value: string) => setForm((current) => ({ ...current, [field]: value }));
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const subject = `Pedido de contacto JOCACH — ${form.project || "Novo projeto"}`;
+    const body = [`Nome: ${form.name}`, `Email: ${form.email}`, `Telefone: ${form.phone || "Não indicado"}`, `Tipo de projeto: ${form.project || "Não indicado"}`, "", form.message].join("\\n");
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setSent(true);
+  };
+  if (sent) return <div className="contact-success"><CheckCircle2 size={28} /><strong>Pedido preparado.</strong><p>O seu cliente de email foi aberto com os dados do projeto. Basta confirmar o envio para falar com a JOCACH.</p><button type="button" onClick={() => { setForm(initialContactForm); setSent(false); }}>Enviar outro pedido</button></div>;
+  return <form className="contact-form" onSubmit={handleSubmit}><div className="contact-form-row"><label>Nome completo<input required value={form.name} onChange={(event) => updateField("name", event.target.value)} placeholder="Como podemos tratar?" /></label><label>Email<input required type="email" value={form.email} onChange={(event) => updateField("email", event.target.value)} placeholder="seu@email.com" /></label></div><div className="contact-form-row"><label>Telefone <span>(opcional)</span><input value={form.phone} onChange={(event) => updateField("phone", event.target.value)} placeholder="+244 ..." /></label><label>Tipo de projeto<select value={form.project} onChange={(event) => updateField("project", event.target.value)}><option value="">Escolher uma opção</option><option>Construção de residência</option><option>Condomínio ou urbanização</option><option>Loteamento</option><option>Projecto para licença</option><option>Outro assunto</option></select></label></div><label>Conte-nos sobre o projeto<textarea required rows={4} value={form.message} onChange={(event) => updateField("message", event.target.value)} placeholder="Localização, dimensão, prazo ou o que já tem em mente..." /></label><div className="contact-form-footer"><span>Respondemos normalmente em até 2 dias úteis.</span><button className="contact-submit" type="submit">Enviar pedido <Send size={15} /></button></div></form>;
+}
+
 export default function Home() {
   return <div className="site-shell"><section className="hero" style={{ "--hero-image": `url(${HERO_IMAGE})` } as React.CSSProperties}><SiteHeader overlay /><div className="hero-grid-lines" aria-hidden="true" /><div className="container hero-content"><div className="hero-copy"><span className="eyebrow eyebrow-light"><span className="eyebrow-dot" />Construção & urbanização · Soyo / Angola</span><h1>Onde o território<br /><em>ganha futuro.</em></h1><p>Construímos condomínios, residências e espaços urbanos com uma visão modernista, local e duradoura.</p><div className="hero-actions"><a className="button button-orange" href="#sobre">Conheça a JOCACH <ArrowUpRight size={16} /></a><Link className="button button-ghost" href="/servicos">Ver serviços <ArrowUpRight size={16} /></Link></div></div><div className="hero-note"><span>01</span><div className="hero-note-line" /><span>JOCACH LDA</span></div></div><div className="hero-footer container"><div className="hero-scroll"><ArrowDown size={16} /><span>Deslize para descobrir</span></div><div className="hero-stats"><span><strong>01</strong> base no Soyo</span><span><strong>04</strong> projetos em curso</span><span><strong>∞</strong> possibilidades</span></div></div></section>
     <section id="sobre" className="about-section section-pad"><div className="container about-grid"><div className="about-title-wrap"><span className="vertical-index">01 / 04</span><SectionIntro eyebrow="Uma empresa com lugar" title="A nossa escala é local. A nossa ambição, grande." /></div><div className="about-copy"><p className="lead-copy">A JOCACH Lda nasce para dar forma a um novo modo de viver no Soyo: mais organizado, mais contemporâneo e mais conectado com o território.</p><p>Somos uma empresa angolana de prestação de serviço e comércio focada em construção civil, condomínios, residências e casas urbanizadas. Trabalhamos entre a precisão técnica e a sensibilidade de quem conhece o lugar.</p><div className="about-checks"><span><Check size={15} /> Visão modernista</span><span><Check size={15} /> Execução responsável</span><span><Check size={15} /> Compromisso com o território</span></div><ArrowLink href="/servicos">Conhecer a nossa abordagem</ArrowLink></div></div></section>
     <section className="services-teaser section-pad section-blue"><div className="container"><div className="services-heading"><SectionIntro light eyebrow="O que fazemos" title="Do primeiro traço à última entrega." body="Uma linha de serviços integrada para que cada decisão do projeto tenha clareza, método e impacto." /><ArrowLink href="/servicos">Ver todos os serviços</ArrowLink></div><div className="service-grid">{services.map(({ number, title, description, icon: Icon }) => <article className="service-card" key={number}><div className="service-card-top"><span>{number}</span><Icon size={25} strokeWidth={1.4} /></div><h3>{title}</h3><p>{description}</p><span className="service-arrow"><ArrowUpRight size={18} /></span></article>)}</div></div></section>
     <section className="project-feature section-pad"><div className="container project-feature-grid"><div className="project-image-wrap"><img src={PROJECT_IMAGE} alt="Arquitetura moderna de um projeto residencial" /><div className="image-caption"><span>JOCACH / VISÃO</span><span>Construção que permanece</span></div></div><div className="project-feature-copy"><span className="vertical-index">02 / 04</span><SectionIntro eyebrow="Projetos em curso" title="A cidade começa antes da primeira casa." body="Projetamos conjuntos que organizam o crescimento, valorizam a paisagem e criam espaço para novas histórias." /><div className="project-list"><div><span>01</span><strong>Bairro Fino</strong><small>Urbanização residencial</small></div><div><span>02</span><strong>Bairro Militar</strong><small>Residências & infraestrutura</small></div><div><span>03</span><strong>Bairro Pinda</strong><small>Loteamento</small></div><div><span>04</span><strong>Lumueno</strong><small>Conceito urbano</small></div></div><ArrowLink href="/projetos">Explorar projetos</ArrowLink></div></div></section>
     <LocationBlock />
-    <section id="contacto" className="contact-section"><div className="container contact-grid"><div><span className="eyebrow eyebrow-light"><span className="eyebrow-dot" />Vamos construir o próximo capítulo</span><h2>Tem um território<br /><em>para transformar?</em></h2></div><div className="contact-panel"><p>Conte-nos sobre o seu projeto. A nossa equipa está pronta para pensar consigo.</p><ContactLink /><span className="contact-small">Resposta em até 2 dias úteis</span></div></div></section><SiteFooter />
+    <section id="contacto" className="contact-section"><div className="container contact-section-heading"><div><span className="eyebrow eyebrow-light"><span className="eyebrow-dot" />Vamos construir o próximo capítulo</span><h2>Tem um território<br /><em>para transformar?</em></h2></div><p>Conte-nos sobre o seu projeto. A nossa equipa está pronta para pensar consigo.</p></div><div className="container contact-form-wrap"><ContactForm /></div><div className="container contact-direct"><span>Prefere falar diretamente?</span><a href="https://wa.me/244923879645" target="_blank" rel="noreferrer">WhatsApp <ArrowUpRight size={15} /></a><a href="mailto:geral@jocach.com">geral@jocach.com <ArrowUpRight size={15} /></a></div></section><SiteFooter />
   </div>;
 }
