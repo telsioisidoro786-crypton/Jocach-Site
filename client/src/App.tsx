@@ -6,6 +6,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Projects from "./pages/Projects";
+import Broda from "./pages/Broda";
 import NotFound from "./pages/NotFound";
 
 const MAP_CENTER = { lat: -6.1349, lng: 12.3689 };
@@ -26,6 +27,7 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
     { label: "A JOCACH", href: "/#sobre" },
     { label: "Serviços", href: "/servicos" },
     { label: "Projetos", href: "/projetos" },
+    { label: "Broda", href: "/broda" },
     { label: "Localização", href: "/#localizacao" },
   ];
   return (
@@ -72,7 +74,7 @@ export function LocationBlock() {
 }
 
 function AppRouter() {
-  return <Switch><Route path="/" component={Home} /><Route path="/servicos" component={Services} /><Route path="/projetos" component={Projects} /><Route component={NotFound} /></Switch>;
+  return <Switch><Route path="/" component={Home} /><Route path="/servicos" component={Services} /><Route path="/projetos" component={Projects} /><Route path="/broda" component={Broda} /><Route component={NotFound} /></Switch>;
 }
 
 export default function App() { return <ThemeProvider defaultTheme="light"><AppRouter /></ThemeProvider>; }
