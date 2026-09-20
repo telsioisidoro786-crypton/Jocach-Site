@@ -9,6 +9,7 @@
     "start": "NODE_ENV=production node dist/index.js",
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
+    "images:optimize": "python3 scripts/optimize-images.py",
     "format": "prettier --write ."
   },
   "dependencies": {

@@ -22,8 +22,9 @@ import {
   SiteHeader,
 } from "../App";
 import Seo from "../components/Seo";
+import OptimizedImage from "../components/OptimizedImage";
+import { trackEvent } from "../lib/analytics";
 
-const HERO_IMAGE = "/images/jocach-hero.jpg";
 const PROJECT_IMAGE = "/images/jocach-projects.jpg";
 const CONTACT_EMAIL = "geral@jocach.com";
 const services = [
@@ -79,6 +80,9 @@ function ContactForm() {
     setForm(current => ({ ...current, [field]: value }));
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    trackEvent("contact_form_prepared", {
+      project: form.project || "unspecified",
+    });
     const subject = `Pedido de contacto JOCACH — ${form.project || "Novo projeto"}`;
     const body = [
       `Nome: ${form.name}`,
@@ -114,20 +118,24 @@ function ContactForm() {
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
       <div className="contact-form-row">
-        <label>
+        <label htmlFor="contact-name">
           Nome completo
           <input
+            id="contact-name"
             required
+            aria-required="true"
             value={form.name}
             onChange={event => updateField("name", event.target.value)}
             placeholder="Como podemos tratar?"
           />
         </label>
-        <label>
+        <label htmlFor="contact-email">
           Email
           <input
+            id="contact-email"
             required
             type="email"
+            aria-required="true"
             value={form.email}
             onChange={event => updateField("email", event.target.value)}
             placeholder="seu@email.com"
@@ -135,17 +143,20 @@ function ContactForm() {
         </label>
       </div>
       <div className="contact-form-row">
-        <label>
+        <label htmlFor="contact-phone">
           Telefone <span>(opcional)</span>
           <input
+            id="contact-phone"
+            type="tel"
             value={form.phone}
             onChange={event => updateField("phone", event.target.value)}
             placeholder="+244 ..."
           />
         </label>
-        <label>
+        <label htmlFor="contact-project">
           Tipo de projeto
           <select
+            id="contact-project"
             value={form.project}
             onChange={event => updateField("project", event.target.value)}
           >
@@ -158,10 +169,12 @@ function ContactForm() {
           </select>
         </label>
       </div>
-      <label>
+      <label htmlFor="contact-message">
         Conte-nos sobre o projeto
         <textarea
+          id="contact-message"
           required
+          aria-required="true"
           rows={4}
           value={form.message}
           onChange={event => updateField("message", event.target.value)}
@@ -188,7 +201,12 @@ export default function Home() {
       />
       <section
         className="hero"
-        style={{ "--hero-image": `url(${HERO_IMAGE})` } as React.CSSProperties}
+        style={
+          {
+            "--hero-image": "url(/images/jocach-hero-2200w.webp)",
+            "--hero-image-mobile": "url(/images/jocach-hero-768w.webp)",
+          } as React.CSSProperties
+        }
       >
         <SiteHeader overlay />
         <div className="hero-grid-lines" aria-hidden="true" />
@@ -272,7 +290,9 @@ export default function Home() {
                 <Check size={15} /> Compromisso com o território
               </span>
             </div>
-            <ArrowLink href="/servicos">Conhecer a nossa abordagem</ArrowLink>
+            <ArrowLink href="/servicos">
+              Conhecer os serviços de construção
+            </ArrowLink>
           </div>
         </div>
       </section>
@@ -345,7 +365,9 @@ export default function Home() {
               title="Do primeiro traço à última entrega."
               body="Uma linha de serviços integrada para que cada decisão do projeto tenha clareza, método e impacto."
             />
-            <ArrowLink href="/servicos">Ver todos os serviços</ArrowLink>
+            <ArrowLink href="/servicos">
+              Conhecer os serviços de urbanização
+            </ArrowLink>
           </div>
           <div className="service-grid">
             {services.map(({ number, title, description, icon: Icon }) => (
@@ -367,9 +389,12 @@ export default function Home() {
       <section className="project-feature section-pad">
         <div className="container project-feature-grid">
           <div className="project-image-wrap">
-            <img
+            <OptimizedImage
               src={PROJECT_IMAGE}
-              alt="Arquitetura moderna de um projeto residencial"
+              alt="Arquitetura moderna de um projeto residencial no Soyo"
+              width={2176}
+              height={1632}
+              sizes="(max-width: 760px) 100vw, 50vw"
             />
             <div className="image-caption">
               <span>JOCACH / VISÃO</span>
@@ -410,7 +435,9 @@ export default function Home() {
                 <small>Expansão urbana</small>
               </div>
             </div>
-            <ArrowLink href="/projetos">Explorar projetos</ArrowLink>
+            <ArrowLink href="/projetos">
+              Ver projetos em curso no Soyo
+            </ArrowLink>
           </div>
         </div>
       </section>
@@ -438,10 +465,15 @@ export default function Home() {
         </div>
         <div className="container contact-direct">
           <span>Prefere falar diretamente?</span>
-          <a href="https://wa.me/244923879645" target="_blank" rel="noreferrer">
+          <a
+            href="https://wa.me/244923879645"
+            target="_blank"
+            rel="noreferrer"
+            data-analytics-event="whatsapp_click"
+          >
             WhatsApp <ArrowUpRight size={15} />
           </a>
-          <a href="mailto:geral@jocach.com">
+          <a href="mailto:geral@jocach.com" data-analytics-event="email_click">
             geral@jocach.com <ArrowUpRight size={15} />
           </a>
         </div>
