@@ -92,6 +92,24 @@ function upsertLink(rel: string, href: string) {
   element.setAttribute("href", href);
 }
 
+function addHeroPreload(active: boolean) {
+  const selector = 'link[data-site-hero-preload="true"]';
+  const existing = document.head.querySelector<HTMLLinkElement>(selector);
+  if (!active) {
+    existing?.remove();
+    return;
+  }
+  if (existing) return;
+  const preload = document.createElement("link");
+  preload.rel = "preload";
+  preload.as = "image";
+  preload.href = "/images/jocach-hero-1280w.webp";
+  preload.type = "image/webp";
+  preload.setAttribute("fetchpriority", "high");
+  preload.dataset.siteHeroPreload = "true";
+  document.head.appendChild(preload);
+}
+
 export default function Seo({
   title,
   description,
@@ -109,6 +127,7 @@ export default function Seo({
         : JOCACH_SCHEMA;
 
     document.documentElement.lang = "pt-AO";
+    addHeroPreload(path === "/");
     document.title = title;
     upsertMeta("name", "description", description);
     upsertMeta("name", "author", "JOCACH Lda");
@@ -147,6 +166,7 @@ export default function Seo({
 
     return () => {
       schemaElement?.remove();
+      if (path === "/") addHeroPreload(false);
     };
   }, [description, image, noindex, path, structuredData, title]);
 

@@ -2,6 +2,7 @@ import { ArrowUpRight, CalendarDays, MapPin } from "lucide-react";
 import { Link } from "wouter";
 import { ArrowLink, SectionIntro, SiteFooter, SiteHeader } from "../App";
 import Seo from "../components/Seo";
+import OptimizedImage from "../components/OptimizedImage";
 
 const PROJECT_IMAGE = "/images/jocach-projects.jpg";
 const projects = [
@@ -90,9 +91,12 @@ export default function Projects() {
         <section className="project-showcase">
           <div className="container project-showcase-grid">
             <div className="showcase-image">
-              <img
+              <OptimizedImage
                 src={PROJECT_IMAGE}
                 alt="Vista de arquitetura e urbanização contemporânea"
+                width={2176}
+                height={1632}
+                sizes="(max-width: 760px) 100vw, 55vw"
               />
               <div className="showcase-stamp">
                 <span>JOCACH</span>

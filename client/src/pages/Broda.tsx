@@ -11,8 +11,8 @@ import {
 import { Link } from "wouter";
 import { SiteFooter, SiteHeader } from "../App";
 import Seo from "../components/Seo";
+import OptimizedImage from "../components/OptimizedImage";
 
-const BRODA_HERO = "/images/broda-hero.jpg";
 const BRODA_INTERIOR = "/images/broda-interior.jpg";
 
 const menu = [
@@ -104,7 +104,12 @@ export default function Broda() {
       />
       <section
         className="broda-hero"
-        style={{ "--broda-hero": `url(${BRODA_HERO})` } as React.CSSProperties}
+        style={
+          {
+            "--broda-hero": `url(/images/broda-hero-2200w.webp)`,
+            "--broda-hero-mobile": `url(/images/broda-hero-768w.webp)`,
+          } as React.CSSProperties
+        }
       >
         <SiteHeader overlay />
         <div className="broda-hero-noise" aria-hidden="true" />
@@ -124,10 +129,18 @@ export default function Broda() {
               vontade de voltar no dia seguinte.
             </p>
             <div className="broda-actions">
-              <a className="broda-button broda-button-main" href="#menu">
+              <a
+                className="broda-button broda-button-main"
+                href="#menu"
+                data-analytics-event="broda_menu_view"
+              >
                 Ver o menu <ArrowUpRight size={16} />
               </a>
-              <a className="broda-text-link" href="#onde-estamos">
+              <a
+                className="broda-text-link"
+                href="#onde-estamos"
+                data-analytics-event="broda_location_view"
+              >
                 Encontrar a Broda <MapPin size={15} />
               </a>
             </div>
@@ -211,7 +224,11 @@ export default function Broda() {
               <span className="broda-promo-cycle">Oferta rotativa semanal</span>
             </div>
           </div>
-          <a className="broda-promo-action" href="#menu">
+          <a
+            className="broda-promo-action"
+            href="#menu"
+            data-analytics-event="broda_menu_view"
+          >
             Quero esta oferta <ArrowUpRight size={18} />
           </a>
         </div>
@@ -256,7 +273,14 @@ export default function Broda() {
             {visibleMenu.map((item, index) => (
               <article className="broda-menu-card" key={item.name}>
                 <div className="broda-menu-image">
-                  <img src={item.image} alt={item.name} loading="lazy" />
+                  <OptimizedImage
+                    src={item.image}
+                    alt={`${item.name} — Hamburgaria Broda no Soyo`}
+                    width={1920}
+                    height={1920}
+                    widths={[480, 768, 1200]}
+                    sizes="(max-width: 760px) 100vw, 25vw"
+                  />
                   <span className="broda-menu-tag">{item.tag}</span>
                 </div>
                 <div className="broda-menu-card-top">
@@ -280,9 +304,12 @@ export default function Broda() {
       <section className="broda-story">
         <div className="container broda-story-grid">
           <div className="broda-story-image">
-            <img
+            <OptimizedImage
               src={BRODA_INTERIOR}
               alt="Interior acolhedor da Hamburgaria Broda"
+              width={2176}
+              height={1632}
+              sizes="(max-width: 760px) 100vw, 50vw"
             />
             <div className="broda-image-stamp">
               BRODA
@@ -322,6 +349,7 @@ export default function Broda() {
               href="https://www.google.com/maps/search/?api=1&query=Soyo%2C+Zaire%2C+Angola"
               target="_blank"
               rel="noreferrer"
+              data-analytics-event="maps_click"
             >
               Abrir no Google Maps <ArrowUpRight size={16} />
             </a>
@@ -350,6 +378,7 @@ export default function Broda() {
             <a
               className="broda-button broda-button-main"
               href="mailto:geral@jocach.com?subject=Hamburgaria%20Broda"
+              data-analytics-event="broda_contact_email_click"
             >
               Falar com a Broda <ArrowUpRight size={16} />
             </a>

@@ -59,13 +59,13 @@ A página explica ainda o método de trabalho da empresa em três fases: **enten
 
 A página de projetos apresenta cinco frentes urbanas identificadas no conteúdo atual:
 
-| Projeto | Tipo | Estado |
-| --- | --- | --- |
-| Bairro Fina | Urbanização residencial | Em curso |
-| Bairro Militar | Residências e infraestrutura | Em curso |
-| Bairro Pinda | Loteamento | Em curso |
-| Lumueno | Conceito urbano | Em curso |
-| Bairro Kintambi | Expansão urbana | Em curso |
+| Projeto         | Tipo                         | Estado   |
+| --------------- | ---------------------------- | -------- |
+| Bairro Fina     | Urbanização residencial      | Em curso |
+| Bairro Militar  | Residências e infraestrutura | Em curso |
+| Bairro Pinda    | Loteamento                   | Em curso |
+| Lumueno         | Conceito urbano              | Em curso |
+| Bairro Kintambi | Expansão urbana              | Em curso |
 
 O **Bairro Fina** aparece como projeto em destaque, descrito como uma urbanização pensada para ligar ruas, habitação e paisagem urbana no Soyo, Zaire.
 
@@ -128,19 +128,19 @@ Depois de preparar a mensagem, o site apresenta uma confirmação local e permit
 
 ## Stack técnica
 
-| Camada | Tecnologia |
-| --- | --- |
-| Interface | React 19 |
-| Linguagem | TypeScript |
-| Bundler e desenvolvimento | Vite 7 |
-| Routing | Wouter |
-| Estilos | CSS global com Tailwind CSS disponível no projeto |
-| Ícones | Lucide React |
-| Servidor de produção | Express 4 + esbuild |
-| Validação | TypeScript (`tsc --noEmit`) |
-| Gestão de pacotes | pnpm |
-| Deploy | Vercel |
-| Mapa | Google Maps carregado através do proxy frontend configurado |
+| Camada                    | Tecnologia                                                  |
+| ------------------------- | ----------------------------------------------------------- |
+| Interface                 | React 19                                                    |
+| Linguagem                 | TypeScript                                                  |
+| Bundler e desenvolvimento | Vite 7                                                      |
+| Routing                   | Wouter                                                      |
+| Estilos                   | CSS global com Tailwind CSS disponível no projeto           |
+| Ícones                    | Lucide React                                                |
+| Servidor de produção      | Express 4 + esbuild                                         |
+| Validação                 | TypeScript (`tsc --noEmit`)                                 |
+| Gestão de pacotes         | pnpm                                                        |
+| Deploy                    | Vercel                                                      |
+| Mapa                      | Google Maps carregado através do proxy frontend configurado |
 
 O projeto também inclui componentes reutilizáveis baseados em Radix UI e utilitários para formulários, acessibilidade, temas, overlays e interações responsivas.
 
@@ -236,14 +236,14 @@ Se o mapa não carregar, a página mantém um fallback visual com a identificaç
 
 ## Scripts disponíveis
 
-| Comando | Finalidade |
-| --- | --- |
-| `pnpm run dev` | Inicia o Vite em modo de desenvolvimento. |
-| `pnpm run build` | Gera o frontend em `dist/public` e o servidor em `dist/index.js`. |
-| `pnpm run start` | Inicia o servidor Express com o build de produção. |
-| `pnpm run preview` | Pré-visualiza o build do Vite. |
-| `pnpm run check` | Executa a verificação TypeScript sem emitir ficheiros. |
-| `pnpm run format` | Formata os ficheiros do projeto com Prettier. |
+| Comando            | Finalidade                                                        |
+| ------------------ | ----------------------------------------------------------------- |
+| `pnpm run dev`     | Inicia o Vite em modo de desenvolvimento.                         |
+| `pnpm run build`   | Gera o frontend em `dist/public` e o servidor em `dist/index.js`. |
+| `pnpm run start`   | Inicia o servidor Express com o build de produção.                |
+| `pnpm run preview` | Pré-visualiza o build do Vite.                                    |
+| `pnpm run check`   | Executa a verificação TypeScript sem emitir ficheiros.            |
+| `pnpm run format`  | Formata os ficheiros do projeto com Prettier.                     |
 
 Antes de abrir um Pull Request, execute pelo menos:
 
@@ -320,7 +320,7 @@ A rota de fallback apresenta a página `NotFound`.
 
 ## SEO e ficheiros públicos
 
-O ficheiro `client/index.html` define o idioma `pt-PT`, título, descrição, palavras-chave, canonical URL, Open Graph, Twitter Card, fontes, favicon e Apple Touch Icon.
+O ficheiro `client/index.html` define o idioma `pt-AO`, título, descrição, palavras-chave, canonical URL, Open Graph, Twitter Card, fontes, favicon e Apple Touch Icon. As páginas também atualizam os metadados de forma específica através de `client/src/components/Seo.tsx`.
 
 Os ficheiros `client/public/robots.txt` e `client/public/sitemap.xml` estão disponíveis na raiz pública do site. Sempre que forem criadas novas páginas indexáveis, reveja o sitemap e os metadados correspondentes.
 
@@ -329,6 +329,18 @@ Os ficheiros `client/public/robots.txt` e `client/public/sitemap.xml` estão dis
 O componente `CookieConsent` controla a escolha do visitante no navegador. Por defeito, o site carrega apenas cookies e armazenamento local essenciais. Analytics só deve ser carregado depois de o visitante aceitar cookies.
 
 Qualquer nova ferramenta de analytics, publicidade, chat ou marketing deve ser adicionada apenas depois de rever a política de privacidade, o comportamento do consentimento e as necessidades de atualização do texto legal.
+
+## SEO e performance — Fase 2
+
+A Fase 2 adiciona um fluxo de otimização técnica sem alterar os assets originais. O script `scripts/optimize-images.py` gera versões WebP responsivas para os heróis, imagens institucionais, interior da Broda e itens do menu. Os componentes usam `picture`, `srcset`, `sizes`, `loading="lazy"`, `decoding="async"` e dimensões intrínsecas. A imagem hero da homepage recebe preload condicional e `fetchpriority="high"`; as restantes imagens são carregadas conforme entram na área visível.
+
+Os eventos comerciais são enviados através do Umami quando o visitante aceita cookies. O componente `CookieConsent` continua a impedir o carregamento do analytics antes do consentimento. Os eventos disponíveis incluem `whatsapp_click`, `email_click`, `proposal_email_click`, `contact_form_prepared`, `maps_click`, `broda_menu_view`, `broda_location_view` e `broda_contact_email_click`. Como o formulário usa `mailto:`, `contact_form_prepared` significa que o pedido foi preparado no cliente de email, não que a mensagem foi efetivamente enviada.
+
+As variáveis de analytics e mapa estão exemplificadas em `.env.example`. Copie o ficheiro para `.env.local` em desenvolvimento e configure os valores reais no ambiente de deploy. Nunca versione chaves ou identificadores privados.
+
+A camada de acessibilidade da Fase 2 inclui foco visível, `label` associado a cada campo do formulário, `aria-required` nos campos obrigatórios, dimensões de imagens para reduzir CLS, textos de links mais descritivos, suporte a `prefers-reduced-motion` e tradução da página 404 para português.
+
+O sitemap inclui `lastmod` para as páginas alteradas em 20 de setembro de 2026. Depois de cada alteração real de conteúdo, reveja a data correspondente e confirme o sitemap no Google Search Console. A validação de performance deve ser feita com Lighthouse, PageSpeed Insights e testes reais em dispositivos móveis.
 
 ## Convenções de desenvolvimento
 
@@ -357,4 +369,3 @@ O `package.json` declara a licença **MIT** para o projeto. Os textos, logótipo
 [4]: https://vite.dev "Documentação do Vite"
 [5]: https://react.dev "Documentação do React"
 [6]: https://www.typescriptlang.org "Documentação do TypeScript"
-

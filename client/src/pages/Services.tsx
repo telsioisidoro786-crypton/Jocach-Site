@@ -9,6 +9,7 @@ import {
   ServiceIcon,
 } from "../App";
 import Seo from "../components/Seo";
+import OptimizedImage from "../components/OptimizedImage";
 
 const serviceRows = [
   {
@@ -112,10 +113,13 @@ export default function Services() {
         <section className="services-list-section section-pad">
           <div className="container services-list-layout">
             <aside className="services-aside">
-              <img
+              <OptimizedImage
                 className="services-aside-image"
                 src={SERVICE_IMAGE}
                 alt="Urbanização moderna no Soyo"
+                width={2176}
+                height={1632}
+                sizes="(max-width: 760px) 100vw, 30vw"
               />
               <span className="vertical-index">01 / SERVIÇOS</span>
               <p>
