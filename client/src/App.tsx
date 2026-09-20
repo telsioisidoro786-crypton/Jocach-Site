@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { MapView } from "./components/Map";
 import CookieConsent from "./components/CookieConsent";
+import VercelAnalytics from "./components/VercelAnalytics";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
@@ -305,6 +306,7 @@ export default function App() {
   return (
     <ThemeProvider defaultTheme="light">
       <AnalyticsClickListener />
+      <VercelAnalytics />
       <AppRouter />
       <CookieConsent />
       <WhatsAppFloat />

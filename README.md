@@ -336,6 +336,8 @@ A Fase 2 adiciona um fluxo de otimização técnica sem alterar os assets origin
 
 Os eventos comerciais são enviados através do Umami quando o visitante aceita cookies. O componente `CookieConsent` continua a impedir o carregamento do analytics antes do consentimento. Os eventos disponíveis incluem `whatsapp_click`, `email_click`, `proposal_email_click`, `contact_form_prepared`, `maps_click`, `broda_menu_view`, `broda_location_view` e `broda_contact_email_click`. Como o formulário usa `mailto:`, `contact_form_prepared` significa que o pedido foi preparado no cliente de email, não que a mensagem foi efetivamente enviada.
 
+O pacote oficial `@vercel/analytics` está montado no layout global através de `client/src/components/VercelAnalytics.tsx`. Este componente usa a mesma preferência de cookies e só monta `<Analytics />` depois da aceitação explícita do visitante. Para ver os dados, é necessário abrir o projeto na área **Analytics** da Vercel depois de o deployment de produção estar ativo.
+
 As variáveis de analytics e mapa estão exemplificadas em `.env.example`. Copie o ficheiro para `.env.local` em desenvolvimento e configure os valores reais no ambiente de deploy. Nunca versione chaves ou identificadores privados.
 
 A camada de acessibilidade da Fase 2 inclui foco visível, `label` associado a cada campo do formulário, `aria-required` nos campos obrigatórios, dimensões de imagens para reduzir CLS, textos de links mais descritivos, suporte a `prefers-reduced-motion` e tradução da página 404 para português.
