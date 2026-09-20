@@ -29,6 +29,7 @@ export default function CookieConsent() {
 
   const choose = (value: Exclude<Consent, null>) => {
     window.localStorage.setItem(CONSENT_KEY, value);
+    window.dispatchEvent(new Event("jocach:consent-change"));
     setConsent(value);
   };
 
