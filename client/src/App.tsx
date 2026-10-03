@@ -33,7 +33,7 @@ type Role = "bot" | "user";
 type Message = { id: number; role: Role; text: string; time: string; kind?: "normal" | "success" | "fallback" };
 
 const slots = ["19:00", "19:30", "20:00", "20:30", "21:00"];
-const quickActions = ["Reservar mesa", "Alterar reserva", "Ver menu", "Falar com a equipa"];
+const quickActions = ["Reservar mesa", "Reservar grupo", "Alterar reserva", "Ver menu", "Falar com a equipa"];
 
 const initialMessages: Message[] = [
   { id: 1, role: "bot", text: "Olá, Inês. Sou o Mimo, o assistente da Casa Mimo. Posso tratar da sua mesa em menos de um minuto.", time: "19:38" },
@@ -87,6 +87,9 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [humanRequested, setHumanRequested] = useState(false);
+  const [largeGroup, setLargeGroup] = useState(false);
+  const [depositPaid, setDepositPaid] = useState(false);
+  const [depositLoading, setDepositLoading] = useState(false);
 
   const sendMessage = (text: string) => {
     const clean = text.trim();
@@ -99,6 +102,7 @@ export default function App() {
       let reply = "Posso ajudar com reservas, disponibilidade, menu ou encaminhar a conversa para a equipa. O que prefere fazer?";
       let kind: Message["kind"] = "fallback";
       if (normalized.includes("menu")) { reply = "Claro. O menu de hoje está disponível aqui: entradas, pratos do dia e sobremesas. Quer que envie o menu completo por WhatsApp?"; kind = "normal"; }
+      if (normalized.includes("grupo") || normalized.includes("8 pessoas") || normalized.includes("10 pessoas") || normalized.includes("12 pessoas")) { setLargeGroup(true); reply = "Para grupos de 8 ou mais pessoas pedimos um sinal de 50 € para segurar a mesa. Primeiro, diga-me a data e o número final de pessoas."; kind = "normal"; }
       if (normalized.includes("equipa") || normalized.includes("humano") || normalized.includes("pessoa")) { setHumanRequested(true); reply = "A Andreia da equipa vai assumir esta conversa. Tempo médio de resposta: 3 minutos."; kind = "success"; }
       if (normalized.includes("reserv")) { reply = "Vamos tratar disso. Para quantas pessoas devo procurar uma mesa?"; kind = "normal"; }
       setMessages(prev => [...prev, { id: Date.now() + 1, role: "bot", text: reply, time: now(), kind }]);
@@ -119,6 +123,8 @@ export default function App() {
     setMessages(prev => [...prev, { id: Date.now(), role: "user", text: "Sim, pode confirmar.", time: now() }, { id: Date.now() + 1, role: "bot", text: `Reserva confirmada para hoje às ${selectedSlot}. Enviámos os detalhes para o seu contacto. Até já!`, time: now(), kind: "success" }]);
   };
   const askHuman = () => { setHumanRequested(true); sendMessage("Quero falar com uma pessoa da equipa"); };
+  const startGroupFlow = () => { setLargeGroup(true); setMessages(prev => [...prev, { id: Date.now(), role: "user", text: "Quero reservar para um grupo.", time: now() }, { id: Date.now() + 1, role: "bot", text: "Para grupos de 8 ou mais pessoas pedimos um sinal de 50 € para segurar a mesa. Tenho 8 lugares disponíveis hoje às 20:30. Quer avançar?", time: now() }]); };
+  const requestDeposit = () => { setDepositLoading(true); window.setTimeout(() => { setDepositLoading(false); setDepositPaid(true); setMessages(prev => [...prev, { id: Date.now(), role: "bot", text: "Sinal registado em modo demonstração. Em produção, este botão abre uma sessão Checkout hospedada e só confirma após webhook de pagamento concluído.", time: now(), kind: "success" }]); }, 900); };
   const retry = () => { setError(false); setMessages(prev => [...prev, { id: Date.now(), role: "bot", text: "Ligação recuperada. Posso continuar a verificar a disponibilidade para si.", time: now(), kind: "success" }]); };
   const subtitle = useMemo(() => confirmed ? "Reserva confirmada" : humanRequested ? "A aguardar a equipa" : "A verificar disponibilidade", [confirmed, humanRequested]);
 
@@ -131,11 +137,13 @@ export default function App() {
           <div className="conversation-head"><div className="conversation-person"><BotAvatar /><div><div className="person-name">Mimo <span className="verified"><Check size={11} /></span></div><div className="person-status"><span className="online-dot" /> {subtitle}</div></div></div><div className="conversation-actions"><button className="soft-button"><PhoneCall size={15} /> Contactar</button><button className="icon-button subtle"><MoreHorizontal size={18} /></button></div></div>
           {error && <div className="error-banner"><AlertCircle size={16} /><span>Não foi possível atualizar a disponibilidade.</span><button onClick={retry}><RefreshCw size={14} /> Tentar novamente</button><button className="close-banner" onClick={() => setError(false)}><X size={14} /></button></div>}
           <div className="conversation-body"><div className="date-divider"><span>Hoje, 03 de outubro</span></div>{messages.map(message => <MessageBubble key={message.id} message={message} />)}{loading && <div className="message-row bot"><BotAvatar small /><div className="typing"><i /><i /><i /></div></div>}
-            {!confirmed && !humanRequested && <div className="slot-card"><div className="slot-card-head"><div><span className="mini-label">Disponibilidade em tempo real</span><strong>Hoje · 03 outubro · 2 pessoas</strong></div><span className="available-badge"><span className="online-dot" /> 5 lugares</span></div><div className="slot-list">{slots.map(slot => <button key={slot} className={`slot-button ${selectedSlot === slot ? "selected" : ""}`} onClick={() => chooseSlot(slot)}><Clock3 size={14} />{slot}</button>)}</div></div>}
+            {largeGroup && !depositPaid && <div className="deposit-card"><div className="deposit-card-top"><div className="deposit-symbol">€</div><div><span className="mini-label">Proteção para grupos grandes</span><strong>Sinal de reserva · 50 €</strong></div><span className="secure-label"><LockKeyhole size={12} /> Seguro</span></div><p>O sinal é associado à reserva e descontado no consumo final, de acordo com a política da Casa Mimo.</p><div className="deposit-summary"><span><Users size={14} /> Grupo até 8 pessoas</span><strong>50,00 €</strong></div><button className="deposit-button" onClick={requestDeposit} disabled={depositLoading}>{depositLoading ? <><RefreshCw size={14} className="spin" /> A preparar pagamento...</> : <>Abrir pagamento seguro <ChevronRight size={15} /></>}</button><small>Modo demonstração · Stripe Checkout / CoverManager em produção</small></div>}
+            {largeGroup && depositPaid && <div className="deposit-paid"><CheckCircle2 size={18} /><div><strong>Sinal recebido · 50,00 €</strong><span>Reserva de grupo pronta para confirmação pela equipa.</span></div><span className="paid-badge">Pago</span></div>}
+            {!confirmed && !humanRequested && !largeGroup && <div className="slot-card"><div className="slot-card-head"><div><span className="mini-label">Disponibilidade em tempo real</span><strong>Hoje · 03 outubro · 2 pessoas</strong></div><span className="available-badge"><span className="online-dot" /> 5 lugares</span></div><div className="slot-list">{slots.map(slot => <button key={slot} className={`slot-button ${selectedSlot === slot ? "selected" : ""}`} onClick={() => chooseSlot(slot)}><Clock3 size={14} />{slot}</button>)}</div></div>}
             {selectedSlot && !confirmed && <div className="confirm-card"><div className="confirm-icon"><CheckCircle2 size={18} /></div><div><strong>Segurar mesa às {selectedSlot}?</strong><span>A reserva fica pendente até confirmar.</span></div><button className="confirm-button" onClick={confirmReservation}>Confirmar <Check size={15} /></button></div>}
             {humanRequested && <div className="human-card"><div className="human-icon"><Headphones size={18} /></div><div><strong>Conversa encaminhada</strong><span>Andreia Silva foi notificada e responderá em breve.</span></div><span className="eta">~ 3 min</span></div>}
           </div>
-          <div className="quick-actions"><span>Sugestões</span>{quickActions.map(action => <button key={action} onClick={() => action === "Falar com a equipa" ? askHuman() : sendMessage(action)}>{action}</button>)}</div>
+          <div className="quick-actions"><span>Sugestões</span>{quickActions.map(action => <button key={action} onClick={() => action === "Falar com a equipa" ? askHuman() : action === "Reservar grupo" ? startGroupFlow() : sendMessage(action)}>{action}</button>)}</div>
           <form className="composer" onSubmit={handleSubmit}><button type="button" className="composer-add" aria-label="Adicionar"><Plus size={18} /></button><input value={input} onChange={event => setInput(event.target.value)} placeholder="Escreva uma mensagem..." aria-label="Mensagem" /><span className="composer-hint">Enter</span><button className="send-button" type="submit" aria-label="Enviar"><Send size={17} /></button></form>
           <div className="privacy-note"><LockKeyhole size={12} /> Conversa protegida · Dados usados apenas para gerir a sua reserva</div>
         </section>
